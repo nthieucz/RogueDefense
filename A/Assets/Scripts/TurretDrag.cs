@@ -5,6 +5,8 @@ using UnityEngine.EventSystems;
 
 public class TurretDrag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
+
+    private CanvasGroup canvasGroup;
     private TurretController turretController;
     private RectTransform rectTransform;
     [SerializeField] private Canvas canvas;
@@ -12,11 +14,11 @@ public class TurretDrag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,
 
 
     // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        turretController = gameObject.GetComponent<TurretController>();
-        rectTransform = gameObject.GetComponent<RectTransform>();
-
+        turretController = GetComponent<TurretController>();
+        rectTransform = GetComponent<RectTransform>();
+        canvasGroup = GetComponent<CanvasGroup>();
     }
 
     // Update is called once per frame
@@ -28,12 +30,14 @@ public class TurretDrag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        
+        canvasGroup.blocksRaycasts = false;
+        canvasGroup.alpha = .6f;
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        
+        canvasGroup.blocksRaycasts = true;
+        canvasGroup.alpha = 1f;
     }
 
     public void OnPointerDown(PointerEventData eventData)

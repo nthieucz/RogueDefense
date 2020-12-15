@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 public class TurretController : MonoBehaviour
@@ -27,7 +28,7 @@ public class TurretController : MonoBehaviour
         cooldown = 1/turret.attackspeed;
         damage = turret.baseDamage;
         range = turret.range;
-        GetComponent<SpriteRenderer>().sprite = turret.sprite;
+        GetComponent<Image>().sprite = turret.sprite;
         
     }
 

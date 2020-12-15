@@ -47,10 +47,6 @@ public class TurretController : MonoBehaviour
 
         cooldownEnd -= Time.deltaTime;
 
-        if (Input.GetMouseButtonDown(0))
-        {
-            setActive();
-        }
     }
 
     /*

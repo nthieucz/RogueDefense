@@ -1,8 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
-public class ProximityTrigger : MonoBehaviour, IPointerDownHandler
+
+public class ProximityTrigger : MonoBehaviour
 {
 
     public TurretController turretController;
@@ -28,8 +28,4 @@ public class ProximityTrigger : MonoBehaviour, IPointerDownHandler
         }
     }
 
-    public void OnPointerDown(PointerEventData eventData)
-    {
-        throw new System.NotImplementedException();
-    }
 }

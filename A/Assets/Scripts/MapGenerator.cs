@@ -19,13 +19,14 @@ public class MapGenerator : MonoBehaviour
 
     private void Start()
     {
-        Vector2 center = cam.transform.position;
-        xLength = tile.GetComponent<RectTransform>().sizeDelta.x;
-        yLength = tile.GetComponent<RectTransform>().sizeDelta.y;
+        Vector2 center = canvas.position;
+        xLength = tile.GetComponent<RectTransform>().sizeDelta.x -5;
+        yLength = tile.GetComponent<RectTransform>().sizeDelta.y -5;
 
         float xstart = (rowLength / 2 - 0.5f)*xLength;
         float ystart = (columnLength / 2 - 0.5f) * yLength;
         Vector2 start = center - new Vector2(xstart, ystart);
+        Debug.Log(start);
 
         for (int x=0; x<rowLength; x++)
         {

@@ -4,57 +4,36 @@ using UnityEngine;
 
 public class MapGenerator : MonoBehaviour
 {
-    public GameObject horizontalWall;
-    public GameObject verticalWall;
-    private Grid grid;
-    public MapInfo mapInfo;
 
-    private int width;
-    private int height;
-    private float cellSize;
+    public GameObject tile;
+    public Camera cam;
+    public Transform canvas;
 
-    // Start is called before the first frame update
-    void Start()
+    private int columnLength=10;
+    private int rowLength=10;
+
+    private float xLength;
+    private float yLength;
+
+
+
+    private void Start()
     {
-        width = mapInfo.width;
-        height = mapInfo.height;
-        cellSize = mapInfo.cellSize;
-        grid = new Grid(width, height, cellSize);
-        generateWalls(width, height, cellSize);
-    }
+        Vector2 center = cam.transform.position;
+        xLength = tile.GetComponent<RectTransform>().sizeDelta.x;
+        yLength = tile.GetComponent<RectTransform>().sizeDelta.y;
 
-    // Update is called once per frame
-    void Update()
-    {
-        /*
-        if (Input.GetMouseButtonDown(0))
+        float xstart = (rowLength / 2 - 0.5f)*xLength;
+        float ystart = (columnLength / 2 - 0.5f) * yLength;
+        Vector2 start = center - new Vector2(xstart, ystart);
+
+        for (int x=0; x<rowLength; x++)
         {
-            grid.SetValue(getMousePosition(), 1);
+            for(int y=0; y<columnLength; y++)
+            {
+                GameObject.Instantiate(tile, start + new Vector2(x * xLength, y * yLength), Quaternion.identity, canvas);
+                
+            }
         }
-        */
-        
-    }
-
-    public static Vector3 getMousePositionZ(Vector3 screenPosition, Camera worldCamera)
-    {
-        Vector3 worldPosition = worldCamera.ScreenToWorldPoint(screenPosition);
-        return worldPosition;
-    }
-    //return mouse positon in world with z = 0f;
-    public static Vector3 getMousePosition()
-    {
-        Vector3 vec = getMousePositionZ(Input.mousePosition, Camera.main);
-        vec.z = 0f;
-        return vec;
-    }
-    //Works only on square
-    public void generateWalls(int width, int height, float cellSize)
-    {
-        horizontalWall.transform.localScale = new Vector3(width * cellSize, 1);
-        verticalWall.transform.localScale = new Vector3(1, height * cellSize);
-        GameObject.Instantiate(horizontalWall, new Vector3(width * cellSize / 2, -0.5f), new Quaternion());
-        GameObject.Instantiate(horizontalWall, new Vector3(width * cellSize / 2, height*cellSize+0.5f), new Quaternion());
-        GameObject.Instantiate(verticalWall, new Vector3(-0.5f, height*cellSize/2), new Quaternion());
-        GameObject.Instantiate(verticalWall, new Vector3(width*cellSize + 0.5f, height * cellSize / 2), new Quaternion());
     }
 }
